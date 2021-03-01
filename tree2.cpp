@@ -97,3 +97,66 @@ int main()
     print_tree_node(root);
     
 }
+
+
+// taking input in the tree
+
+#include<iostream>
+#include<vector> 
+using namespace std;
+class Treenode{
+   public:
+    int data;
+    vector<Treenode*>children;
+    // constructor
+    Treenode(int data1)
+    {
+        this->data=data1;
+    }
+};
+
+Treenode * takeinput()
+{
+    int rootdata;
+    cout<<"Enter the rootdata"<<endl;
+    cin>>rootdata;
+    Treenode*root =  new Treenode (rootdata);
+    
+    int n;
+    cout<<"Enter the number of the children "<<rootdata<<endl;
+    cin>>n;
+    for(int i=0;i<n;i++)
+    {
+        Treenode * child = takeinput();
+        root->children.push_back(child);
+    }
+    return root;
+}
+
+void print_tree(Treenode * root)
+{
+    if(root==NULL)
+    {
+        return ;
+    }
+    cout<<root->data <<" : ";
+    for(int i=0;i<root->children.size();i++)
+    {
+        cout<<root->children[i]->data<<" , ";
+    }
+    cout<<endl;
+    for(int i=0;i<root->children.size();i++)
+    {
+        print_tree(root->children[i]);
+    }
+    
+}
+
+int main()
+{
+   
+    Treenode *root = takeinput();
+    cout<<endl;
+    print_tree(root);
+    return 0;
+}
